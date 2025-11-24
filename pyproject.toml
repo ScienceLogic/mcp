@@ -1,0 +1,40 @@
+[project]
+name = "mcp-sl"
+version = "0.2.0"
+description = "MCP server for allowing AI to interact with ScienceLogic products"
+readme = "README.md"
+authors = [
+    { name = "caleb burch", email = "caleb.burch@sciencelogic.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastmcp>=2.12.2",
+    "httpx>=0.28.1",
+    "pydantic>=2.11.7",
+    "starlette>=0.48.0",
+    "uvicorn>=0.35.0",
+]
+
+
+[dependency-groups]
+dev = [
+    "autopep8>=2.3.2",
+    "pylint>=4.0.2",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.1.0",
+]
+
+[project.scripts]
+mcp-sl = "mcp_sl.main:main"
+
+[build-system]
+requires = ["uv_build>=0.8.15,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.pylint.messages_control]
+disable = [
+    "C0116", #missing-function-doctstring
+    "C0115", #missing-class-docstring
+    "C0114", #missing-module-docstring
+    "C0301", # line-too-long
+]

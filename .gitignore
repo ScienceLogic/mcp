@@ -1,0 +1,7 @@
+.venv/
+__pycache__
+.pytest_cache
+.myenv
+requirements.txt
+.logfire
+dist/
