@@ -22,7 +22,7 @@ docker run --rm -p 8000:8000 \
 -e SKY_COMP_API_KEY=changeme \
 -e SKY_ONE_API_URL=https://changeme/ \
 -e SKY_ONE_API_KEY=changeme \
-calebburch199/sciencelogic-mcp:latest
+ghcr.io/sciencelogic/mcp:latest
 ```
 
 # Example Usage
@@ -47,7 +47,7 @@ docker run --rm -p 8000:8000 \
 -e SKY_COMP_API_KEY=changeme \
 -e SKY_ONE_API_URL=https://changeme/ \
 -e SKY_ONE_API_KEY=changeme \
-calebburch199/sciencelogic-mcp:latest
+ghcr.io/sciencelogic/mcp:latest
 ```
 
 ## Build Docker image from Source
