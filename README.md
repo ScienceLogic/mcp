@@ -83,7 +83,7 @@ uv run --env-file .myenv uvicorn mcp_sl.server:app --host 0.0.0.0 --port 8000 --
 | `SKY_COMP_PREFIX` | (Optional, default="/sc_") Prefixes every tool, helpful for tool name collisions
 | `SKY_ONE_ENABLE` | (Optional, default=true) enables the Skylar One MCP server, requires SKY_ONE_API_URL and SKY_ONE_API_KEY 
 | `SKY_ONE_API_URL`              | (Required) API endpoint for your Skylar One instance e.g. `https://my.sl1.host/api/` (requires trailing slash)
-| `SKY_ONE_API_KEY`              | (Required) API Key used to auth your API instance, Base64 encoded 'user:pass'
+| `SKY_ONE_API_KEY`              | (Required) Basic Auth used to auth your API instance, Base64 encoded 'user:pass'
 | `SKY_ONE_PREFIX` | (Optional, default="/s1_") Prefixes every tool, helpful for tool name collisions
 | `MAX_QUERY_LIMIT` | (Optional, default=50) limits the maximum number of results an agent can request (to prevent overloading API endpoints)
 | `LOG_LEVEL`               | (Optional, default=INFO) set the app log level (uvicorn will ignore it currently)
@@ -132,10 +132,12 @@ uv run pytest
 
 # Security
 
-- Uses API token authentication
-- All requests proxy through configured API endpoints
+- This MCP server is unathenticated
+- Uses API authentication to proxy requests to backend API endpoints
 - Not recommended for public networks
 - Access to this server grants access to your ScienceLogic appliances
+- This MCP server is for experimental use only 
+
 
 # License
 
