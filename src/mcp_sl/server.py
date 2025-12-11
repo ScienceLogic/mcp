@@ -15,7 +15,7 @@ from contextlib import asynccontextmanager, AsyncExitStack
 from starlette.applications import Starlette
 from starlette.routing import Mount
 from mcp_sl.config import get_config
-from mcp_sl.middleware import LoggingMiddleware
+from mcp_sl.middleware import LoggingMiddleware, StripUnknownArgumentsMiddleware
 from mcp_sl.skylar_compliance.apis import sky_comp_mcp
 from mcp_sl.skylar_one.apis import sky_one_mcp
 
@@ -33,6 +33,7 @@ apps_for_lifespan = []
 
 if cfg.SKY_COMP_ENABLE:
     logger.info("Starting Skylar Compliance MCP server on /sky_comp/mcp")
+    sky_comp_mcp.add_middleware(StripUnknownArgumentsMiddleware())
     sky_comp_mcp.add_middleware(LoggingMiddleware())
     rp_app = sky_comp_mcp.http_app()
     routes.append(Mount("/sky_comp", rp_app))
@@ -40,6 +41,7 @@ if cfg.SKY_COMP_ENABLE:
 
 if cfg.SKY_ONE_ENABLE:
     logger.info("Starting Skylar One MCP server on /sky_one/mcp")
+    sky_one_mcp.add_middleware(StripUnknownArgumentsMiddleware())
     sky_one_mcp.add_middleware(LoggingMiddleware())
     sky_one_app = sky_one_mcp.http_app()
     routes.append(Mount("/sky_one", sky_one_app))

@@ -138,7 +138,6 @@ uv run pytest
 - Access to this server grants access to your ScienceLogic appliances
 - This MCP server is for experimental use only 
 
-
 # License
 
 Licensed under Apache 2.0 - see [LICENSE](LICENSE) file.  This is not an official ScienceLogic product.

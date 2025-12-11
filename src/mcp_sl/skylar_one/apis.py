@@ -62,12 +62,14 @@ def _build_device_search(device_id: int = None, severity_level: int = None, devi
     return search_string
 
 
+# TODO refactor this into a better search generation function
 def _build_business_service_search(
     risk_level: Optional[int] = None,
     health_level: Optional[int] = None,
-    unavailable_only: bool = False
+    unavailable_only: bool = False,
+    name_contains: Optional[str] = None
 ) -> str:
-    if not risk_level and not health_level and not unavailable_only:
+    if not risk_level and not health_level and not unavailable_only and not name_contains:
         return "{ }"
     search_string = "{ and: ["
 
@@ -101,6 +103,9 @@ def _build_business_service_search(
 
     if unavailable_only:
         search_string += '{{ availability: {{ lte: 0 }} }}, '
+
+    if name_contains:
+        search_string += f'{{ name: {{ contains: "{name_contains}" }} }}, '
 
     search_string += " ] }"
     return search_string
@@ -330,11 +335,15 @@ async def list_business_services(
         description="Number of results to return for pagination",
         gt=0,
         le=get_config().MAX_QUERY_LIMIT)] = 10,
+    name_contains: Annotated[Optional[str], Field(
+        description="Name of the business service to filter by, will do a contains search"
+    )] = None,
     cursor: Annotated[Optional[str],
                       "Cursor of the last business service to start from (will return next device), get the cursor from a previous request"] = ""
 ) -> models.ResponseEnvelope[models.BusinessServiceGQL]:
     search = _build_business_service_search(
-        risk_level, health_level, unavailable_only)
+        risk_level, health_level, unavailable_only, name_contains)
+    logger.debug("BizSvc search query: %s", search)
     body = {
         "query": f"""
             query list_business_services {{
