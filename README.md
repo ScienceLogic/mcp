@@ -4,8 +4,8 @@ A FastMCP server that provides AI agents with access to ScienceLogic products th
 
 ## Supported Products
 
-* Skylar One - `/sky_one/mcp`
-* Skylar Compliance - `/sky_comp/mcp`
+* Skylar One (AP2 v:Nougat)- `/sky_one/mcp`
+* Skylar Compliance (v:5.6) - `/sky_comp/mcp`
 
 ## Quick Start
 
