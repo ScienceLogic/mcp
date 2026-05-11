@@ -59,7 +59,7 @@ class DeviceGQL(BaseModel):
     device_class_description: str = Field(description="Description of this device class", validation_alias=AliasPath("node", "deviceClass", "description"))
     device_class_logical_name: str = Field(description="Logical name of this device class", validation_alias=AliasPath("node", "deviceClass", "logicalName"))
     device_class_category: str = Field(description="Category of this device class", validation_alias=AliasPath("node", "deviceClass", "deviceCategory", "name"))
-    device_class_virtual_type: str = Field(description="Virtual Type of this device class (physical, virtual, or component)", validation_alias=AliasPath("node", "deviceClass", "virtualType"))
+    device_class_virtual_type: Optional[str] = Field(default=None, description="Virtual Type of this device class (physical, virtual, or component)", validation_alias=AliasPath("node", "deviceClass", "virtualType"))
     severity_level: str = Field(description="Current health of the device", validation_alias=AliasPath("node", "severityLevel"))
 
 class EventGQL(BaseModel):
